@@ -1,6 +1,6 @@
 # svirsh
 
-
+[![CircleCI](https://circleci.com/gh/youyo/svirsh.svg?style=svg)](https://circleci.com/gh/youyo/svirsh)
 
 ## Description
 
