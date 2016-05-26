@@ -1,0 +1,4 @@
+package: github.com/youyo/svirsh
+import:
+- package: github.com/BurntSushi/toml
+- package: github.com/youyo/emptyport

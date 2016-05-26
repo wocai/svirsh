@@ -1,0 +1,34 @@
+cmdline
+install
+text
+autostep
+firewall --disabled
+selinux --disabled
+firstboot --disabled
+keyboard jp106
+lang en_US.UTF-8
+poweroff
+
+{{range $i, $e := .Domain.Network}}network --device eth{{$i}} --onboot yes --noipv6 --bootproto static --ip {{$e.Ip}} --netmask {{$e.Netmask}} {{if $e.Default_gateway}} --gateway {{$e.Default_gateway}}{{end}} {{if $e.Nameserver}} --nameserver {{$e.Nameserver}}{{end}}
+{{end}}
+
+authconfig --enableshadow --passalgo=sha512
+rootpw --plaintext {{.Domain.Root_password}}
+{{if eq .Domain.Os_variant "rhel7"}}timezone --isUtc Asia/Tokyo{{else}}timezone --utc Asia/Tokyo{{end}}
+
+{{if eq .Domain.Os_variant "rhel7"}}zerombr{{else}}zerombr yes{{end}}
+bootloader --location=mbr --driveorder=sda
+authconfig --enableshadow --passalgo=sha512
+clearpart --all --initlabel
+{{if eq .Domain.Os_variant "rhel7"}}part /boot --fstype "xfs" --size=500{{else}}part /boot --fstype "ext4" --size=500{{end}}
+part pv.1 --size=1 --grow
+volgroup vg00 pv.1
+{{if ne .Domain.Swap 0}}logvol swap --name=lv_swap --vgname=vg00 --size={{.Domain.Swap}}{{end}}
+{{if eq .Domain.Os_variant "rhel7"}}logvol / --name=lv_root --vgname=vg00 --size=1 --grow --fstype "xfs"{{else}}logvol / --name=lv_root --vgname=vg00 --size=1 --grow --fstype "ext4"{{end}}
+
+%packages
+@core
+{{if ne .Domain.Os_variant "rhel7"}}@japanese-support{{end}}
+vim-enhanced
+acpid
+%end
