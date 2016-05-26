@@ -9,13 +9,13 @@ machine:
     REPODIR: "${WORKDIR}/${CIRCLE_PROJECT_REPONAME}"
   post:
     - |
-      sudo mkdir -p ~/download
-      sudo test -e ~/download/$GODIST || sudo curl -o ~/download/$GODIST https://storage.googleapis.com/golang/$GODIST
+      mkdir -p ~/download
+      test -e ~/download/$GODIST || curl -o ~/download/$GODIST https://storage.googleapis.com/golang/$GODIST
       sudo rm -rf /usr/local/go
       sudo tar -C /usr/local -xzf ~/download/$GODIST
-      sudo rm -rf $GOPATH/src/*
-      sudo mkdir -p ${WORKDIR}
-      sudo cp -a $HOME/$CIRCLE_PROJECT_REPONAME $WORKDIR/
+      sudo rm -rf /home/ubuntu/.go_workspace/src/
+      mkdir -p ${WORKDIR}
+      cp -a $HOME/$CIRCLE_PROJECT_REPONAME $WORKDIR/
 
 dependencies:
   cache_directories:
