@@ -44,4 +44,4 @@ deployment:
         cd ${REPODIR}
         gox --osarch "linux/amd64" --output "${CIRCLE_PROJECT_REPONAME}"
         zip ${CIRCLE_PROJECT_REPONAME}_linux_amd64.zip ${CIRCLE_PROJECT_REPONAME}
-        ghr -t ${GITHUB_TOKEN} -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `cat version.go | grep -w 'const Version string' | awk -F '"' '{print "v"$2}'` ${CIRCLE_PROJECT_REPONAME}_linux_amd64.zip
+        ghr -t ${GITHUB_TOKEN} -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `cat version.go | grep -w 'const Version string' | awk -F '"' '{print "v"$2}'` ${CIRCLE_PROJECT_REPONAME}_linux_amd64.zip layout.html config.toml
