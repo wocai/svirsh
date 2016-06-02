@@ -156,7 +156,7 @@ func (cfg Config) virtInstallCmd(serverUrl string) string {
 		" --os-variant " + cfg.Domain.Os_variant +
 		" --disk path=" + cfg.Domain.DiskPath + ",size=" + strconv.Itoa(cfg.Domain.DiskSize) + ",format=qcow2"
 	for _, v := range cfg.Domain.Network {
-		cmd += " --network bridge=" + v.Iface
+		cmd += " --network " + v.Iface
 	}
 	cmd += " --graphics vnc,listen=127.0.0.1,keymap=ja --serial pty" +
 		" --console pty --noautoconsole --wait -1 --location=" + cfg.Image.Location +

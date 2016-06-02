@@ -11,14 +11,14 @@ os_type = "linux"
 os_variant = "rhel7"
 
 [[Domain.Network]]
-interface = "br0"
+interface = "bridge=br0"
 ip = "192.168.0.2"
 netmask = "255.255.255.0"
 default_gateway = "192.168.0.1"
 nameserver = "8.8.8.8"
 
 [[Domain.Network]]
-interface = "br1"
+interface = "bridge=br1"
 ip = "192.168.1.2"
 netmask = "255.255.255.0"
 
