@@ -1,10 +1,10 @@
-## 0.1.0 (2016-05-24)
+## 0.1.0 (2016-06-02)
 
-Initial release
+Add sample files.
 
 ### Added
 
-- Add Fundamental features
+- Add sample files.
 
 ### Deprecated
 
