@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"reflect"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -29,5 +30,15 @@ func TestReadConfig(t *testing.T) {
 	expected := Config{}
 	if reflect.DeepEqual(actual, expected) {
 		t.Errorf("got %v\nwant %v", actual, expected)
+	}
+}
+
+func TestStartServer(t *testing.T) {
+	cfg := readConfig("config.toml")
+	url := cfg.startServer()
+	expected := `192.168.0.9:\d{4,5}`
+	m, _ := regexp.MatchString(expected, url)
+	if !m {
+		t.Errorf("got %v\nwant %v", url, expected)
 	}
 }
