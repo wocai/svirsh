@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -23,20 +24,10 @@ func TestRun_versionFlag(t *testing.T) {
 	}
 }
 
-func TestRun_debugFlag(t *testing.T) {
-	outStream, errStream := new(bytes.Buffer), new(bytes.Buffer)
-	cli := &CLI{outStream: outStream, errStream: errStream}
-	args := strings.Split("./svirsh -debug", " ")
-
-	status := cli.Run(args)
-	_ = status
-}
-
-func TestRun_domainFlag(t *testing.T) {
-	outStream, errStream := new(bytes.Buffer), new(bytes.Buffer)
-	cli := &CLI{outStream: outStream, errStream: errStream}
-	args := strings.Split("./svirsh -domain", " ")
-
-	status := cli.Run(args)
-	_ = status
+func TestReadConfig(t *testing.T) {
+	actual := readConfig("config.toml")
+	expected := Config{}
+	if reflect.DeepEqual(actual, expected) {
+		t.Errorf("got %v\nwant %v", actual, expected)
+	}
 }
