@@ -167,6 +167,7 @@ func (cfg Config) virtInstallCmd(serverUrl string) string {
 		" netmask=" + cfg.Domain.Network[0].Netmask +
 		" gateway=" + cfg.Domain.Network[0].Default_gateway +
 		" dns=" + cfg.Domain.Network[0].Nameserver +
+		" ksdevice=eth0" +
 		"\""
 	return cmd
 }
